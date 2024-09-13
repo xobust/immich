@@ -41,7 +41,7 @@ class StackUpdateDto {
     if (this.primaryAssetId != null) {
       json[r'primaryAssetId'] = this.primaryAssetId;
     } else {
-    //  json[r'primaryAssetId'] = null;
+      json[r'primaryAssetId'] = null;
     }
     return json;
   }
@@ -52,6 +52,17 @@ class StackUpdateDto {
   static StackUpdateDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "StackUpdateDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "StackUpdateDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return StackUpdateDto(
         primaryAssetId: mapValueOfType<String>(json, r'primaryAssetId'),

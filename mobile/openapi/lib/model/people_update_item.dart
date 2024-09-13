@@ -78,23 +78,23 @@ class PeopleUpdateItem {
     if (this.birthDate != null) {
       json[r'birthDate'] = _dateFormatter.format(this.birthDate!.toUtc());
     } else {
-    //  json[r'birthDate'] = null;
+      json[r'birthDate'] = null;
     }
     if (this.featureFaceAssetId != null) {
       json[r'featureFaceAssetId'] = this.featureFaceAssetId;
     } else {
-    //  json[r'featureFaceAssetId'] = null;
+      json[r'featureFaceAssetId'] = null;
     }
       json[r'id'] = this.id;
     if (this.isHidden != null) {
       json[r'isHidden'] = this.isHidden;
     } else {
-    //  json[r'isHidden'] = null;
+      json[r'isHidden'] = null;
     }
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     return json;
   }
@@ -105,6 +105,17 @@ class PeopleUpdateItem {
   static PeopleUpdateItem? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "PeopleUpdateItem[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "PeopleUpdateItem[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return PeopleUpdateItem(
         birthDate: mapDateTime(json, r'birthDate', r''),

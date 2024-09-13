@@ -108,38 +108,38 @@ class AssetBulkUpdateDto {
     if (this.dateTimeOriginal != null) {
       json[r'dateTimeOriginal'] = this.dateTimeOriginal;
     } else {
-    //  json[r'dateTimeOriginal'] = null;
+      json[r'dateTimeOriginal'] = null;
     }
     if (this.duplicateId != null) {
       json[r'duplicateId'] = this.duplicateId;
     } else {
-    //  json[r'duplicateId'] = null;
+      json[r'duplicateId'] = null;
     }
       json[r'ids'] = this.ids;
     if (this.isArchived != null) {
       json[r'isArchived'] = this.isArchived;
     } else {
-    //  json[r'isArchived'] = null;
+      json[r'isArchived'] = null;
     }
     if (this.isFavorite != null) {
       json[r'isFavorite'] = this.isFavorite;
     } else {
-    //  json[r'isFavorite'] = null;
+      json[r'isFavorite'] = null;
     }
     if (this.latitude != null) {
       json[r'latitude'] = this.latitude;
     } else {
-    //  json[r'latitude'] = null;
+      json[r'latitude'] = null;
     }
     if (this.longitude != null) {
       json[r'longitude'] = this.longitude;
     } else {
-    //  json[r'longitude'] = null;
+      json[r'longitude'] = null;
     }
     if (this.rating != null) {
       json[r'rating'] = this.rating;
     } else {
-    //  json[r'rating'] = null;
+      json[r'rating'] = null;
     }
     return json;
   }
@@ -150,6 +150,17 @@ class AssetBulkUpdateDto {
   static AssetBulkUpdateDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "AssetBulkUpdateDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "AssetBulkUpdateDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return AssetBulkUpdateDto(
         dateTimeOriginal: mapValueOfType<String>(json, r'dateTimeOriginal'),

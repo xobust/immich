@@ -69,18 +69,18 @@ class DownloadInfoDto {
     if (this.albumId != null) {
       json[r'albumId'] = this.albumId;
     } else {
-    //  json[r'albumId'] = null;
+      json[r'albumId'] = null;
     }
     if (this.archiveSize != null) {
       json[r'archiveSize'] = this.archiveSize;
     } else {
-    //  json[r'archiveSize'] = null;
+      json[r'archiveSize'] = null;
     }
       json[r'assetIds'] = this.assetIds;
     if (this.userId != null) {
       json[r'userId'] = this.userId;
     } else {
-    //  json[r'userId'] = null;
+      json[r'userId'] = null;
     }
     return json;
   }
@@ -91,6 +91,17 @@ class DownloadInfoDto {
   static DownloadInfoDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "DownloadInfoDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "DownloadInfoDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return DownloadInfoDto(
         albumId: mapValueOfType<String>(json, r'albumId'),

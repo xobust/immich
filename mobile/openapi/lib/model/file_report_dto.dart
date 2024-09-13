@@ -49,6 +49,17 @@ class FileReportDto {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "FileReportDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "FileReportDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
       return FileReportDto(
         extras: json[r'extras'] is Iterable
             ? (json[r'extras'] as Iterable).cast<String>().toList(growable: false)

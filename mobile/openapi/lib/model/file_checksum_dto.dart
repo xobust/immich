@@ -43,6 +43,17 @@ class FileChecksumDto {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "FileChecksumDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "FileChecksumDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
       return FileChecksumDto(
         filenames: json[r'filenames'] is Iterable
             ? (json[r'filenames'] as Iterable).cast<String>().toList(growable: false)

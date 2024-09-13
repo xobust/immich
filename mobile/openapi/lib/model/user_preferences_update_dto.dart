@@ -129,47 +129,47 @@ class UserPreferencesUpdateDto {
     if (this.avatar != null) {
       json[r'avatar'] = this.avatar;
     } else {
-    //  json[r'avatar'] = null;
+      json[r'avatar'] = null;
     }
     if (this.download != null) {
       json[r'download'] = this.download;
     } else {
-    //  json[r'download'] = null;
+      json[r'download'] = null;
     }
     if (this.emailNotifications != null) {
       json[r'emailNotifications'] = this.emailNotifications;
     } else {
-    //  json[r'emailNotifications'] = null;
+      json[r'emailNotifications'] = null;
     }
     if (this.folders != null) {
       json[r'folders'] = this.folders;
     } else {
-    //  json[r'folders'] = null;
+      json[r'folders'] = null;
     }
     if (this.memories != null) {
       json[r'memories'] = this.memories;
     } else {
-    //  json[r'memories'] = null;
+      json[r'memories'] = null;
     }
     if (this.people != null) {
       json[r'people'] = this.people;
     } else {
-    //  json[r'people'] = null;
+      json[r'people'] = null;
     }
     if (this.purchase != null) {
       json[r'purchase'] = this.purchase;
     } else {
-    //  json[r'purchase'] = null;
+      json[r'purchase'] = null;
     }
     if (this.ratings != null) {
       json[r'ratings'] = this.ratings;
     } else {
-    //  json[r'ratings'] = null;
+      json[r'ratings'] = null;
     }
     if (this.tags != null) {
       json[r'tags'] = this.tags;
     } else {
-    //  json[r'tags'] = null;
+      json[r'tags'] = null;
     }
     return json;
   }
@@ -180,6 +180,17 @@ class UserPreferencesUpdateDto {
   static UserPreferencesUpdateDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "UserPreferencesUpdateDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "UserPreferencesUpdateDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return UserPreferencesUpdateDto(
         avatar: AvatarUpdate.fromJson(json[r'avatar']),

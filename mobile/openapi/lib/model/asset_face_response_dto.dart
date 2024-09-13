@@ -88,12 +88,12 @@ class AssetFaceResponseDto {
     if (this.person != null) {
       json[r'person'] = this.person;
     } else {
-    //  json[r'person'] = null;
+      json[r'person'] = null;
     }
     if (this.sourceType != null) {
       json[r'sourceType'] = this.sourceType;
     } else {
-    //  json[r'sourceType'] = null;
+      json[r'sourceType'] = null;
     }
     return json;
   }
@@ -104,6 +104,17 @@ class AssetFaceResponseDto {
   static AssetFaceResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "AssetFaceResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "AssetFaceResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return AssetFaceResponseDto(
         boundingBoxX1: mapValueOfType<int>(json, r'boundingBoxX1')!,

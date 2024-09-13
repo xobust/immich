@@ -49,6 +49,17 @@ class ValidateLibraryDto {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "ValidateLibraryDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "ValidateLibraryDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
       return ValidateLibraryDto(
         exclusionPatterns: json[r'exclusionPatterns'] is Iterable
             ? (json[r'exclusionPatterns'] as Iterable).cast<String>().toList(growable: false)

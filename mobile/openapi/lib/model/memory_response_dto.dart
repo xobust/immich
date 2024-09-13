@@ -100,7 +100,7 @@ class MemoryResponseDto {
     if (this.deletedAt != null) {
       json[r'deletedAt'] = this.deletedAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'deletedAt'] = null;
+      json[r'deletedAt'] = null;
     }
       json[r'id'] = this.id;
       json[r'isSaved'] = this.isSaved;
@@ -109,7 +109,7 @@ class MemoryResponseDto {
     if (this.seenAt != null) {
       json[r'seenAt'] = this.seenAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'seenAt'] = null;
+      json[r'seenAt'] = null;
     }
       json[r'type'] = this.type;
       json[r'updatedAt'] = this.updatedAt.toUtc().toIso8601String();
@@ -122,6 +122,17 @@ class MemoryResponseDto {
   static MemoryResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "MemoryResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "MemoryResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return MemoryResponseDto(
         assets: AssetResponseDto.listFromJson(json[r'assets']),

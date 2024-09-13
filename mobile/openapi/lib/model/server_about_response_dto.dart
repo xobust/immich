@@ -199,73 +199,73 @@ class ServerAboutResponseDto {
     if (this.build != null) {
       json[r'build'] = this.build;
     } else {
-    //  json[r'build'] = null;
+      json[r'build'] = null;
     }
     if (this.buildImage != null) {
       json[r'buildImage'] = this.buildImage;
     } else {
-    //  json[r'buildImage'] = null;
+      json[r'buildImage'] = null;
     }
     if (this.buildImageUrl != null) {
       json[r'buildImageUrl'] = this.buildImageUrl;
     } else {
-    //  json[r'buildImageUrl'] = null;
+      json[r'buildImageUrl'] = null;
     }
     if (this.buildUrl != null) {
       json[r'buildUrl'] = this.buildUrl;
     } else {
-    //  json[r'buildUrl'] = null;
+      json[r'buildUrl'] = null;
     }
     if (this.exiftool != null) {
       json[r'exiftool'] = this.exiftool;
     } else {
-    //  json[r'exiftool'] = null;
+      json[r'exiftool'] = null;
     }
     if (this.ffmpeg != null) {
       json[r'ffmpeg'] = this.ffmpeg;
     } else {
-    //  json[r'ffmpeg'] = null;
+      json[r'ffmpeg'] = null;
     }
     if (this.imagemagick != null) {
       json[r'imagemagick'] = this.imagemagick;
     } else {
-    //  json[r'imagemagick'] = null;
+      json[r'imagemagick'] = null;
     }
     if (this.libvips != null) {
       json[r'libvips'] = this.libvips;
     } else {
-    //  json[r'libvips'] = null;
+      json[r'libvips'] = null;
     }
       json[r'licensed'] = this.licensed;
     if (this.nodejs != null) {
       json[r'nodejs'] = this.nodejs;
     } else {
-    //  json[r'nodejs'] = null;
+      json[r'nodejs'] = null;
     }
     if (this.repository != null) {
       json[r'repository'] = this.repository;
     } else {
-    //  json[r'repository'] = null;
+      json[r'repository'] = null;
     }
     if (this.repositoryUrl != null) {
       json[r'repositoryUrl'] = this.repositoryUrl;
     } else {
-    //  json[r'repositoryUrl'] = null;
+      json[r'repositoryUrl'] = null;
     }
     if (this.sourceCommit != null) {
       json[r'sourceCommit'] = this.sourceCommit;
     } else {
-    //  json[r'sourceCommit'] = null;
+      json[r'sourceCommit'] = null;
     }
     if (this.sourceRef != null) {
       json[r'sourceRef'] = this.sourceRef;
     } else {
-    //  json[r'sourceRef'] = null;
+      json[r'sourceRef'] = null;
     }
     if (this.sourceUrl != null) {
       json[r'sourceUrl'] = this.sourceUrl;
     } else {
-    //  json[r'sourceUrl'] = null;
+      json[r'sourceUrl'] = null;
     }
       json[r'version'] = this.version;
       json[r'versionUrl'] = this.versionUrl;
@@ -278,6 +278,17 @@ class ServerAboutResponseDto {
   static ServerAboutResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "ServerAboutResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "ServerAboutResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return ServerAboutResponseDto(
         build: mapValueOfType<String>(json, r'build'),

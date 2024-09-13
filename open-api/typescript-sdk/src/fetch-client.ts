@@ -429,6 +429,7 @@ export type UpdateAssetDto = {
     latitude?: number;
     livePhotoVideoId?: string | null;
     longitude?: number;
+    originalFileName?: string;
     rating?: number;
 };
 export type AssetMediaReplaceDto = {

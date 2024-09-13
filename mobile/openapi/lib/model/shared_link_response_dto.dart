@@ -106,7 +106,7 @@ class SharedLinkResponseDto {
     if (this.album != null) {
       json[r'album'] = this.album;
     } else {
-    //  json[r'album'] = null;
+      json[r'album'] = null;
     }
       json[r'allowDownload'] = this.allowDownload;
       json[r'allowUpload'] = this.allowUpload;
@@ -115,25 +115,25 @@ class SharedLinkResponseDto {
     if (this.description != null) {
       json[r'description'] = this.description;
     } else {
-    //  json[r'description'] = null;
+      json[r'description'] = null;
     }
     if (this.expiresAt != null) {
       json[r'expiresAt'] = this.expiresAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'expiresAt'] = null;
+      json[r'expiresAt'] = null;
     }
       json[r'id'] = this.id;
       json[r'key'] = this.key;
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
       json[r'showMetadata'] = this.showMetadata;
     if (this.token != null) {
       json[r'token'] = this.token;
     } else {
-    //  json[r'token'] = null;
+      json[r'token'] = null;
     }
       json[r'type'] = this.type;
       json[r'userId'] = this.userId;
@@ -146,6 +146,17 @@ class SharedLinkResponseDto {
   static SharedLinkResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "SharedLinkResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "SharedLinkResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return SharedLinkResponseDto(
         album: AlbumResponseDto.fromJson(json[r'album']),

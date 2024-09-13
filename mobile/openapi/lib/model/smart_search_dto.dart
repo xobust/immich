@@ -320,145 +320,145 @@ class SmartSearchDto {
     if (this.city != null) {
       json[r'city'] = this.city;
     } else {
-    //  json[r'city'] = null;
+      json[r'city'] = null;
     }
     if (this.country != null) {
       json[r'country'] = this.country;
     } else {
-    //  json[r'country'] = null;
+      json[r'country'] = null;
     }
     if (this.createdAfter != null) {
       json[r'createdAfter'] = this.createdAfter!.toUtc().toIso8601String();
     } else {
-    //  json[r'createdAfter'] = null;
+      json[r'createdAfter'] = null;
     }
     if (this.createdBefore != null) {
       json[r'createdBefore'] = this.createdBefore!.toUtc().toIso8601String();
     } else {
-    //  json[r'createdBefore'] = null;
+      json[r'createdBefore'] = null;
     }
     if (this.deviceId != null) {
       json[r'deviceId'] = this.deviceId;
     } else {
-    //  json[r'deviceId'] = null;
+      json[r'deviceId'] = null;
     }
     if (this.isArchived != null) {
       json[r'isArchived'] = this.isArchived;
     } else {
-    //  json[r'isArchived'] = null;
+      json[r'isArchived'] = null;
     }
     if (this.isEncoded != null) {
       json[r'isEncoded'] = this.isEncoded;
     } else {
-    //  json[r'isEncoded'] = null;
+      json[r'isEncoded'] = null;
     }
     if (this.isFavorite != null) {
       json[r'isFavorite'] = this.isFavorite;
     } else {
-    //  json[r'isFavorite'] = null;
+      json[r'isFavorite'] = null;
     }
     if (this.isMotion != null) {
       json[r'isMotion'] = this.isMotion;
     } else {
-    //  json[r'isMotion'] = null;
+      json[r'isMotion'] = null;
     }
     if (this.isNotInAlbum != null) {
       json[r'isNotInAlbum'] = this.isNotInAlbum;
     } else {
-    //  json[r'isNotInAlbum'] = null;
+      json[r'isNotInAlbum'] = null;
     }
     if (this.isOffline != null) {
       json[r'isOffline'] = this.isOffline;
     } else {
-    //  json[r'isOffline'] = null;
+      json[r'isOffline'] = null;
     }
     if (this.isVisible != null) {
       json[r'isVisible'] = this.isVisible;
     } else {
-    //  json[r'isVisible'] = null;
+      json[r'isVisible'] = null;
     }
     if (this.lensModel != null) {
       json[r'lensModel'] = this.lensModel;
     } else {
-    //  json[r'lensModel'] = null;
+      json[r'lensModel'] = null;
     }
     if (this.libraryId != null) {
       json[r'libraryId'] = this.libraryId;
     } else {
-    //  json[r'libraryId'] = null;
+      json[r'libraryId'] = null;
     }
     if (this.make != null) {
       json[r'make'] = this.make;
     } else {
-    //  json[r'make'] = null;
+      json[r'make'] = null;
     }
     if (this.model != null) {
       json[r'model'] = this.model;
     } else {
-    //  json[r'model'] = null;
+      json[r'model'] = null;
     }
     if (this.page != null) {
       json[r'page'] = this.page;
     } else {
-    //  json[r'page'] = null;
+      json[r'page'] = null;
     }
       json[r'personIds'] = this.personIds;
       json[r'query'] = this.query;
     if (this.size != null) {
       json[r'size'] = this.size;
     } else {
-    //  json[r'size'] = null;
+      json[r'size'] = null;
     }
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
     if (this.takenAfter != null) {
       json[r'takenAfter'] = this.takenAfter!.toUtc().toIso8601String();
     } else {
-    //  json[r'takenAfter'] = null;
+      json[r'takenAfter'] = null;
     }
     if (this.takenBefore != null) {
       json[r'takenBefore'] = this.takenBefore!.toUtc().toIso8601String();
     } else {
-    //  json[r'takenBefore'] = null;
+      json[r'takenBefore'] = null;
     }
     if (this.trashedAfter != null) {
       json[r'trashedAfter'] = this.trashedAfter!.toUtc().toIso8601String();
     } else {
-    //  json[r'trashedAfter'] = null;
+      json[r'trashedAfter'] = null;
     }
     if (this.trashedBefore != null) {
       json[r'trashedBefore'] = this.trashedBefore!.toUtc().toIso8601String();
     } else {
-    //  json[r'trashedBefore'] = null;
+      json[r'trashedBefore'] = null;
     }
     if (this.type != null) {
       json[r'type'] = this.type;
     } else {
-    //  json[r'type'] = null;
+      json[r'type'] = null;
     }
     if (this.updatedAfter != null) {
       json[r'updatedAfter'] = this.updatedAfter!.toUtc().toIso8601String();
     } else {
-    //  json[r'updatedAfter'] = null;
+      json[r'updatedAfter'] = null;
     }
     if (this.updatedBefore != null) {
       json[r'updatedBefore'] = this.updatedBefore!.toUtc().toIso8601String();
     } else {
-    //  json[r'updatedBefore'] = null;
+      json[r'updatedBefore'] = null;
     }
       json[r'withArchived'] = this.withArchived;
     if (this.withDeleted != null) {
       json[r'withDeleted'] = this.withDeleted;
     } else {
-    //  json[r'withDeleted'] = null;
+      json[r'withDeleted'] = null;
     }
     if (this.withExif != null) {
       json[r'withExif'] = this.withExif;
     } else {
-    //  json[r'withExif'] = null;
+      json[r'withExif'] = null;
     }
     return json;
   }
@@ -469,6 +469,17 @@ class SmartSearchDto {
   static SmartSearchDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "SmartSearchDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "SmartSearchDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return SmartSearchDto(
         city: mapValueOfType<String>(json, r'city'),

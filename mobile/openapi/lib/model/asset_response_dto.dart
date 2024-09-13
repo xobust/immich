@@ -221,13 +221,13 @@ class AssetResponseDto {
     if (this.duplicateId != null) {
       json[r'duplicateId'] = this.duplicateId;
     } else {
-    //  json[r'duplicateId'] = null;
+      json[r'duplicateId'] = null;
     }
       json[r'duration'] = this.duration;
     if (this.exifInfo != null) {
       json[r'exifInfo'] = this.exifInfo;
     } else {
-    //  json[r'exifInfo'] = null;
+      json[r'exifInfo'] = null;
     }
       json[r'fileCreatedAt'] = this.fileCreatedAt.toUtc().toIso8601String();
       json[r'fileModifiedAt'] = this.fileModifiedAt.toUtc().toIso8601String();
@@ -240,48 +240,48 @@ class AssetResponseDto {
     if (this.libraryId != null) {
       json[r'libraryId'] = this.libraryId;
     } else {
-    //  json[r'libraryId'] = null;
+      json[r'libraryId'] = null;
     }
     if (this.livePhotoVideoId != null) {
       json[r'livePhotoVideoId'] = this.livePhotoVideoId;
     } else {
-    //  json[r'livePhotoVideoId'] = null;
+      json[r'livePhotoVideoId'] = null;
     }
       json[r'localDateTime'] = this.localDateTime.toUtc().toIso8601String();
       json[r'originalFileName'] = this.originalFileName;
     if (this.originalMimeType != null) {
       json[r'originalMimeType'] = this.originalMimeType;
     } else {
-    //  json[r'originalMimeType'] = null;
+      json[r'originalMimeType'] = null;
     }
       json[r'originalPath'] = this.originalPath;
     if (this.owner != null) {
       json[r'owner'] = this.owner;
     } else {
-    //  json[r'owner'] = null;
+      json[r'owner'] = null;
     }
       json[r'ownerId'] = this.ownerId;
       json[r'people'] = this.people;
     if (this.resized != null) {
       json[r'resized'] = this.resized;
     } else {
-    //  json[r'resized'] = null;
+      json[r'resized'] = null;
     }
     if (this.smartInfo != null) {
       json[r'smartInfo'] = this.smartInfo;
     } else {
-    //  json[r'smartInfo'] = null;
+      json[r'smartInfo'] = null;
     }
     if (this.stack != null) {
       json[r'stack'] = this.stack;
     } else {
-    //  json[r'stack'] = null;
+      json[r'stack'] = null;
     }
       json[r'tags'] = this.tags;
     if (this.thumbhash != null) {
       json[r'thumbhash'] = this.thumbhash;
     } else {
-    //  json[r'thumbhash'] = null;
+      json[r'thumbhash'] = null;
     }
       json[r'type'] = this.type;
       json[r'unassignedFaces'] = this.unassignedFaces;
@@ -295,6 +295,17 @@ class AssetResponseDto {
   static AssetResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "AssetResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "AssetResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return AssetResponseDto(
         checksum: mapValueOfType<String>(json, r'checksum')!,

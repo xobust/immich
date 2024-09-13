@@ -52,12 +52,12 @@ class FoldersUpdate {
     if (this.enabled != null) {
       json[r'enabled'] = this.enabled;
     } else {
-    //  json[r'enabled'] = null;
+      json[r'enabled'] = null;
     }
     if (this.sidebarWeb != null) {
       json[r'sidebarWeb'] = this.sidebarWeb;
     } else {
-    //  json[r'sidebarWeb'] = null;
+      json[r'sidebarWeb'] = null;
     }
     return json;
   }
@@ -68,6 +68,17 @@ class FoldersUpdate {
   static FoldersUpdate? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "FoldersUpdate[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "FoldersUpdate[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return FoldersUpdate(
         enabled: mapValueOfType<bool>(json, r'enabled'),

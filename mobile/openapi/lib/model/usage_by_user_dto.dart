@@ -61,7 +61,7 @@ class UsageByUserDto {
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
       json[r'usage'] = this.usage;
       json[r'userId'] = this.userId;
@@ -76,6 +76,17 @@ class UsageByUserDto {
   static UsageByUserDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "UsageByUserDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "UsageByUserDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return UsageByUserDto(
         photos: mapValueOfType<int>(json, r'photos')!,

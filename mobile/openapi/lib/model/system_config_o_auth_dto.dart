@@ -128,6 +128,17 @@ class SystemConfigOAuthDto {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "SystemConfigOAuthDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "SystemConfigOAuthDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
       return SystemConfigOAuthDto(
         autoLaunch: mapValueOfType<bool>(json, r'autoLaunch')!,
         autoRegister: mapValueOfType<bool>(json, r'autoRegister')!,

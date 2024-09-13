@@ -67,12 +67,12 @@ class PlacesResponseDto {
     if (this.admin1name != null) {
       json[r'admin1name'] = this.admin1name;
     } else {
-    //  json[r'admin1name'] = null;
+      json[r'admin1name'] = null;
     }
     if (this.admin2name != null) {
       json[r'admin2name'] = this.admin2name;
     } else {
-    //  json[r'admin2name'] = null;
+      json[r'admin2name'] = null;
     }
       json[r'latitude'] = this.latitude;
       json[r'longitude'] = this.longitude;
@@ -86,6 +86,17 @@ class PlacesResponseDto {
   static PlacesResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "PlacesResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "PlacesResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return PlacesResponseDto(
         admin1name: mapValueOfType<String>(json, r'admin1name'),

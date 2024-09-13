@@ -145,7 +145,7 @@ class AlbumResponseDto {
     if (this.albumThumbnailAssetId != null) {
       json[r'albumThumbnailAssetId'] = this.albumThumbnailAssetId;
     } else {
-    //  json[r'albumThumbnailAssetId'] = null;
+      json[r'albumThumbnailAssetId'] = null;
     }
       json[r'albumUsers'] = this.albumUsers;
       json[r'assetCount'] = this.assetCount;
@@ -155,7 +155,7 @@ class AlbumResponseDto {
     if (this.endDate != null) {
       json[r'endDate'] = this.endDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'endDate'] = null;
+      json[r'endDate'] = null;
     }
       json[r'hasSharedLink'] = this.hasSharedLink;
       json[r'id'] = this.id;
@@ -163,12 +163,12 @@ class AlbumResponseDto {
     if (this.lastModifiedAssetTimestamp != null) {
       json[r'lastModifiedAssetTimestamp'] = this.lastModifiedAssetTimestamp!.toUtc().toIso8601String();
     } else {
-    //  json[r'lastModifiedAssetTimestamp'] = null;
+      json[r'lastModifiedAssetTimestamp'] = null;
     }
     if (this.order != null) {
       json[r'order'] = this.order;
     } else {
-    //  json[r'order'] = null;
+      json[r'order'] = null;
     }
       json[r'owner'] = this.owner;
       json[r'ownerId'] = this.ownerId;
@@ -176,7 +176,7 @@ class AlbumResponseDto {
     if (this.startDate != null) {
       json[r'startDate'] = this.startDate!.toUtc().toIso8601String();
     } else {
-    //  json[r'startDate'] = null;
+      json[r'startDate'] = null;
     }
       json[r'updatedAt'] = this.updatedAt.toUtc().toIso8601String();
     return json;
@@ -188,6 +188,17 @@ class AlbumResponseDto {
   static AlbumResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "AlbumResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "AlbumResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return AlbumResponseDto(
         albumName: mapValueOfType<String>(json, r'albumName')!,

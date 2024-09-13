@@ -61,7 +61,7 @@ class FileReportItemDto {
     if (this.checksum != null) {
       json[r'checksum'] = this.checksum;
     } else {
-    //  json[r'checksum'] = null;
+      json[r'checksum'] = null;
     }
       json[r'entityId'] = this.entityId;
       json[r'entityType'] = this.entityType;
@@ -76,6 +76,17 @@ class FileReportItemDto {
   static FileReportItemDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "FileReportItemDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "FileReportItemDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return FileReportItemDto(
         checksum: mapValueOfType<String>(json, r'checksum'),

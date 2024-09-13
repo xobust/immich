@@ -63,17 +63,17 @@ class MemoryUpdateDto {
     if (this.isSaved != null) {
       json[r'isSaved'] = this.isSaved;
     } else {
-    //  json[r'isSaved'] = null;
+      json[r'isSaved'] = null;
     }
     if (this.memoryAt != null) {
       json[r'memoryAt'] = this.memoryAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'memoryAt'] = null;
+      json[r'memoryAt'] = null;
     }
     if (this.seenAt != null) {
       json[r'seenAt'] = this.seenAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'seenAt'] = null;
+      json[r'seenAt'] = null;
     }
     return json;
   }
@@ -84,6 +84,17 @@ class MemoryUpdateDto {
   static MemoryUpdateDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "MemoryUpdateDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "MemoryUpdateDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return MemoryUpdateDto(
         isSaved: mapValueOfType<bool>(json, r'isSaved'),

@@ -72,11 +72,22 @@ class FacialRecognitionConfig {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "FacialRecognitionConfig[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "FacialRecognitionConfig[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
       return FacialRecognitionConfig(
         enabled: mapValueOfType<bool>(json, r'enabled')!,
-        maxDistance: (mapValueOfType<num>(json, r'maxDistance')!).toDouble(),
+        maxDistance: mapValueOfType<double>(json, r'maxDistance')!,
         minFaces: mapValueOfType<int>(json, r'minFaces')!,
-        minScore: (mapValueOfType<num>(json, r'minScore')!).toDouble(),
+        minScore: mapValueOfType<double>(json, r'minScore')!,
         modelName: mapValueOfType<String>(json, r'modelName')!,
       );
     }

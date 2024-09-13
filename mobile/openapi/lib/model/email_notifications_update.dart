@@ -63,17 +63,17 @@ class EmailNotificationsUpdate {
     if (this.albumInvite != null) {
       json[r'albumInvite'] = this.albumInvite;
     } else {
-    //  json[r'albumInvite'] = null;
+      json[r'albumInvite'] = null;
     }
     if (this.albumUpdate != null) {
       json[r'albumUpdate'] = this.albumUpdate;
     } else {
-    //  json[r'albumUpdate'] = null;
+      json[r'albumUpdate'] = null;
     }
     if (this.enabled != null) {
       json[r'enabled'] = this.enabled;
     } else {
-    //  json[r'enabled'] = null;
+      json[r'enabled'] = null;
     }
     return json;
   }
@@ -84,6 +84,17 @@ class EmailNotificationsUpdate {
   static EmailNotificationsUpdate? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "EmailNotificationsUpdate[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "EmailNotificationsUpdate[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return EmailNotificationsUpdate(
         albumInvite: mapValueOfType<bool>(json, r'albumInvite'),

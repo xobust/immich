@@ -53,7 +53,7 @@ class UpdateLibraryDto {
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     return json;
   }
@@ -64,6 +64,17 @@ class UpdateLibraryDto {
   static UpdateLibraryDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "UpdateLibraryDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "UpdateLibraryDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return UpdateLibraryDto(
         exclusionPatterns: json[r'exclusionPatterns'] is Iterable

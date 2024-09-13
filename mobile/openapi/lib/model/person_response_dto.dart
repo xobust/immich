@@ -67,7 +67,7 @@ class PersonResponseDto {
     if (this.birthDate != null) {
       json[r'birthDate'] = _dateFormatter.format(this.birthDate!.toUtc());
     } else {
-    //  json[r'birthDate'] = null;
+      json[r'birthDate'] = null;
     }
       json[r'id'] = this.id;
       json[r'isHidden'] = this.isHidden;
@@ -76,7 +76,7 @@ class PersonResponseDto {
     if (this.updatedAt != null) {
       json[r'updatedAt'] = this.updatedAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'updatedAt'] = null;
+      json[r'updatedAt'] = null;
     }
     return json;
   }
@@ -87,6 +87,17 @@ class PersonResponseDto {
   static PersonResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "PersonResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "PersonResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return PersonResponseDto(
         birthDate: mapDateTime(json, r'birthDate', r''),

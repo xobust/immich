@@ -83,7 +83,7 @@ class AssetFaceWithoutPersonResponseDto {
     if (this.sourceType != null) {
       json[r'sourceType'] = this.sourceType;
     } else {
-    //  json[r'sourceType'] = null;
+      json[r'sourceType'] = null;
     }
     return json;
   }
@@ -94,6 +94,17 @@ class AssetFaceWithoutPersonResponseDto {
   static AssetFaceWithoutPersonResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "AssetFaceWithoutPersonResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "AssetFaceWithoutPersonResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return AssetFaceWithoutPersonResponseDto(
         boundingBoxX1: mapValueOfType<int>(json, r'boundingBoxX1')!,

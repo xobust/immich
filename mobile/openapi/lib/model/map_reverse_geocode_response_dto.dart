@@ -45,17 +45,17 @@ class MapReverseGeocodeResponseDto {
     if (this.city != null) {
       json[r'city'] = this.city;
     } else {
-    //  json[r'city'] = null;
+      json[r'city'] = null;
     }
     if (this.country != null) {
       json[r'country'] = this.country;
     } else {
-    //  json[r'country'] = null;
+      json[r'country'] = null;
     }
     if (this.state != null) {
       json[r'state'] = this.state;
     } else {
-    //  json[r'state'] = null;
+      json[r'state'] = null;
     }
     return json;
   }
@@ -66,6 +66,17 @@ class MapReverseGeocodeResponseDto {
   static MapReverseGeocodeResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "MapReverseGeocodeResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "MapReverseGeocodeResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return MapReverseGeocodeResponseDto(
         city: mapValueOfType<String>(json, r'city'),

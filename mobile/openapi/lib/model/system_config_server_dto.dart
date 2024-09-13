@@ -49,6 +49,17 @@ class SystemConfigServerDto {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
 
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "SystemConfigServerDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "SystemConfigServerDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
+
       return SystemConfigServerDto(
         externalDomain: mapValueOfType<String>(json, r'externalDomain')!,
         loginPageMessage: mapValueOfType<String>(json, r'loginPageMessage')!,

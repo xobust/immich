@@ -85,32 +85,32 @@ class UserAdminUpdateDto {
     if (this.email != null) {
       json[r'email'] = this.email;
     } else {
-    //  json[r'email'] = null;
+      json[r'email'] = null;
     }
     if (this.name != null) {
       json[r'name'] = this.name;
     } else {
-    //  json[r'name'] = null;
+      json[r'name'] = null;
     }
     if (this.password != null) {
       json[r'password'] = this.password;
     } else {
-    //  json[r'password'] = null;
+      json[r'password'] = null;
     }
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
     if (this.shouldChangePassword != null) {
       json[r'shouldChangePassword'] = this.shouldChangePassword;
     } else {
-    //  json[r'shouldChangePassword'] = null;
+      json[r'shouldChangePassword'] = null;
     }
     if (this.storageLabel != null) {
       json[r'storageLabel'] = this.storageLabel;
     } else {
-    //  json[r'storageLabel'] = null;
+      json[r'storageLabel'] = null;
     }
     return json;
   }
@@ -121,6 +121,17 @@ class UserAdminUpdateDto {
   static UserAdminUpdateDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "UserAdminUpdateDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "UserAdminUpdateDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return UserAdminUpdateDto(
         email: mapValueOfType<String>(json, r'email'),

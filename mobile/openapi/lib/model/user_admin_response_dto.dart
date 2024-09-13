@@ -112,7 +112,7 @@ class UserAdminResponseDto {
     if (this.deletedAt != null) {
       json[r'deletedAt'] = this.deletedAt!.toUtc().toIso8601String();
     } else {
-    //  json[r'deletedAt'] = null;
+      json[r'deletedAt'] = null;
     }
       json[r'email'] = this.email;
       json[r'id'] = this.id;
@@ -120,7 +120,7 @@ class UserAdminResponseDto {
     if (this.license != null) {
       json[r'license'] = this.license;
     } else {
-    //  json[r'license'] = null;
+      json[r'license'] = null;
     }
       json[r'name'] = this.name;
       json[r'oauthId'] = this.oauthId;
@@ -128,19 +128,19 @@ class UserAdminResponseDto {
     if (this.quotaSizeInBytes != null) {
       json[r'quotaSizeInBytes'] = this.quotaSizeInBytes;
     } else {
-    //  json[r'quotaSizeInBytes'] = null;
+      json[r'quotaSizeInBytes'] = null;
     }
     if (this.quotaUsageInBytes != null) {
       json[r'quotaUsageInBytes'] = this.quotaUsageInBytes;
     } else {
-    //  json[r'quotaUsageInBytes'] = null;
+      json[r'quotaUsageInBytes'] = null;
     }
       json[r'shouldChangePassword'] = this.shouldChangePassword;
       json[r'status'] = this.status;
     if (this.storageLabel != null) {
       json[r'storageLabel'] = this.storageLabel;
     } else {
-    //  json[r'storageLabel'] = null;
+      json[r'storageLabel'] = null;
     }
       json[r'updatedAt'] = this.updatedAt.toUtc().toIso8601String();
     return json;
@@ -152,6 +152,17 @@ class UserAdminResponseDto {
   static UserAdminResponseDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "UserAdminResponseDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "UserAdminResponseDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return UserAdminResponseDto(
         avatarColor: UserAvatarColor.fromJson(json[r'avatarColor'])!,

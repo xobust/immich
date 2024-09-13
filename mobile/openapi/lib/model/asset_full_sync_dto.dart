@@ -63,14 +63,14 @@ class AssetFullSyncDto {
     if (this.lastId != null) {
       json[r'lastId'] = this.lastId;
     } else {
-    //  json[r'lastId'] = null;
+      json[r'lastId'] = null;
     }
       json[r'limit'] = this.limit;
       json[r'updatedUntil'] = this.updatedUntil.toUtc().toIso8601String();
     if (this.userId != null) {
       json[r'userId'] = this.userId;
     } else {
-    //  json[r'userId'] = null;
+      json[r'userId'] = null;
     }
     return json;
   }
@@ -81,6 +81,17 @@ class AssetFullSyncDto {
   static AssetFullSyncDto? fromJson(dynamic value) {
     if (value is Map) {
       final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        requiredKeys.forEach((key) {
+          assert(json.containsKey(key), 'Required key "AssetFullSyncDto[$key]" is missing from JSON.');
+          assert(json[key] != null, 'Required key "AssetFullSyncDto[$key]" has a null value in JSON.');
+        });
+        return true;
+      }());
 
       return AssetFullSyncDto(
         lastId: mapValueOfType<String>(json, r'lastId'),
