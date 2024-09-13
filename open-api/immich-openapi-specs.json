@@ -12249,6 +12249,9 @@
           "longitude": {
             "type": "number"
           },
+          "originalFileName": {
+            "type": "string"
+          },
           "rating": {
             "maximum": 5,
             "minimum": 0,
